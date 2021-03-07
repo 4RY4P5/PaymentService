@@ -1,0 +1,1 @@
+insert into CREDIT_CARD values ('cde123',5000);
