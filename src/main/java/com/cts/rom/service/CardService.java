@@ -1,5 +1,6 @@
 package com.cts.rom.service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.rom.dao.CardRepo;
+import com.cts.rom.exception.CardNotFoundException;
 import com.cts.rom.model.CreditCard;
 
 
@@ -18,10 +20,10 @@ public class CardService {
 	CardRepo cardRepo;
 	
 	@Transactional
-	public double processPayment(String cardNumber,double charge) {
-		Optional<CreditCard> result = cardRepo.findByCardNumber(cardNumber);
-		CreditCard card=result.get();
-		
+	public double processPayment(String cardNumber,double charge) throws NoSuchElementException, CardNotFoundException {
+		//Optional<CreditCard> result = cardRepo.findByCardNumber(cardNumber);
+		//CreditCard card=result.get();
+		CreditCard card=cardRepo.findByCardNumber(cardNumber);
 	
 		double balance= card.getCardLimit()-charge;
 		if(balance>0)
