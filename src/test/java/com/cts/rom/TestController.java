@@ -39,8 +39,8 @@ public class TestController {
 	}
 	
 	@Test
-	public void testGetCallnegative() throws Exception {
-		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenThrow(new IllegalArgumentException("FOO!"));
+	public void testGetCallNegative() throws Exception {
+		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenThrow(new IllegalArgumentException("in test Call"));
 		String cardnumber="cde123";
 		Double amt=5000.0;
 		mockMvc.perform(get("/card/{cardNumber}/{charge}",cardnumber,amt)).andExpect(status().isInternalServerError());
