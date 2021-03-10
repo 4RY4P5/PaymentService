@@ -20,7 +20,7 @@ public class CardService {
 	CardRepo cardRepo;
 	
 	@Transactional
-	public double processPayment(String cardNumber,double charge) throws NoSuchElementException, CardNotFoundException {
+	public double processPayment(long cardNumber,double charge) throws NoSuchElementException, CardNotFoundException {
 		//Optional<CreditCard> result = cardRepo.findByCardNumber(cardNumber);
 		//CreditCard card=result.get();
 		CreditCard card=cardRepo.findByCardNumber(cardNumber);
