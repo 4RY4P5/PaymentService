@@ -35,7 +35,7 @@ public class CardController {
 
 	@GetMapping("/card/{cardNumber}/{charge}")
 	@ResponseStatus(code=HttpStatus.OK)
-	public double getBalance(@PathVariable String cardNumber,@PathVariable double charge) throws CardNotFoundException {
+	public double getBalance(@PathVariable long cardNumber,@PathVariable double charge) throws CardNotFoundException {
 		try {
 			return cardService.processPayment(cardNumber,charge);
 		}
