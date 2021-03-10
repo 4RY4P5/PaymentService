@@ -27,13 +27,23 @@ public class TestController {
 	CardService cardService;
 	
 	@Test
-	public void testGetCall() throws Exception {
+	public void testGetCallPositive() throws Exception {
 		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenReturn(2000.0);
 		String cardnumber="cde123";
 		Double amt=5000.0;
 		
 		mockMvc.perform(get("/card/{cardNumber}/{charge}",cardnumber,amt)).andExpect(status().isOk());
 		
+		
+		
+	}
+	
+	@Test
+	public void testGetCallnegative() throws Exception {
+		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenThrow(new IllegalArgumentException("FOO!"));
+		String cardnumber="cde123";
+		Double amt=5000.0;
+		mockMvc.perform(get("/card/{cardNumber}/{charge}",cardnumber,amt)).andExpect(status().isInternalServerError());
 	}
 	
 	
