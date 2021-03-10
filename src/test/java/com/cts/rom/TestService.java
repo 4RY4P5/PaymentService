@@ -2,17 +2,15 @@ package com.cts.rom;
 
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -24,9 +22,7 @@ import com.cts.rom.service.CardService;
 @ExtendWith(MockitoExtension.class)
 public class TestService {
 
-	/*
-	 * @BeforeAll public void init() { MockitoAnnotations.initMocks(this); }
-	 */
+	
 	@Mock
 	CardRepo repo;
 	
@@ -39,13 +35,13 @@ public class TestService {
 	@Test
 	public void testProcessPayment() {
 		
-		card=new CreditCard("def123",4000);
-		when(repo.findByCardNumber("def123")).thenReturn(card);
+		card=new CreditCard(1234567L,4000);
+		when(repo.findByCardNumber(1234567L)).thenReturn(card);
 		when(repo.save(any(CreditCard.class))).thenReturn(card);
 		
 		
-		assertEquals(2000.0,service.processPayment("def123", 2000),0.00);
-		assertEquals(-1,service.processPayment("def123", 5000),0.0);
+		assertEquals(2000.0,service.processPayment(1234567L, 2000),0.00);
+		assertEquals(-1,service.processPayment(1234567L, 5000),0.0);
 		
 	}
 }

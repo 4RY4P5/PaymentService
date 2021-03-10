@@ -28,8 +28,8 @@ public class TestController {
 	
 	@Test
 	public void testGetCallPositive() throws Exception {
-		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenReturn(2000.0);
-		String cardnumber="cde123";
+		when(cardService.processPayment(Mockito.anyLong(), Mockito.anyDouble())).thenReturn(2000.0);
+		Long cardnumber=1234567L;
 		Double amt=5000.0;
 		
 		mockMvc.perform(get("/card/{cardNumber}/{charge}",cardnumber,amt)).andExpect(status().isOk());
@@ -40,12 +40,9 @@ public class TestController {
 	
 	@Test
 	public void testGetCallNegative() throws Exception {
-		when(cardService.processPayment(Mockito.anyString(), Mockito.anyDouble())).thenThrow(new IllegalArgumentException("in test Call"));
-		String cardnumber="cde123";
+		when(cardService.processPayment(Mockito.anyLong(), Mockito.anyDouble())).thenThrow(new IllegalArgumentException("in test call"));
+		Long cardnumber=1234567L;
 		Double amt=5000.0;
 		mockMvc.perform(get("/card/{cardNumber}/{charge}",cardnumber,amt)).andExpect(status().isInternalServerError());
 	}
-	
-	
-	
 }
