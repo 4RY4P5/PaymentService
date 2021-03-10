@@ -9,6 +9,6 @@ import com.cts.rom.model.CreditCard;
 
 public interface CardRepo extends JpaRepository<CreditCard, String>{
 
-	CreditCard findByCardNumber(String cardNumber)throws CardNotFoundException;
+	CreditCard findByCardNumber(long cardNumber)throws CardNotFoundException;
 
 }
