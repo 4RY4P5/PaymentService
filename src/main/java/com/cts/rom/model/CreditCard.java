@@ -18,7 +18,7 @@ import lombok.Setter;
 public class CreditCard {
 
 	@Id
-	private String cardNumber;
+	private long cardNumber;
 	private double cardLimit;
 	
 	
